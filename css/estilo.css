@@ -155,3 +155,15 @@ header {
   border-radius: 5px;
 
 }
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+  color: white;
+  background:black;
+  text-align: center;
+  padding-top: 5px;
+}
