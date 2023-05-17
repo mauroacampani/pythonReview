@@ -15,10 +15,15 @@ const cargarPeliculas = async() => {
         <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="avatar">
         <div class="content">
         <table width="100%" cellspacing="0">
+        <tr>
+				<td><img src="img/star.png" width="" height="20"></img></td>
+				<td>${pelicula.vote_average}</td>
+			</tr>
             <tr>
-                <td><h3>${pelicula.title}</h3></td>
+                <td style="width: 100%;"><p>${pelicula.title}</p></td>
                
             </tr>
+            
         </table>
     </div>
         </div>
