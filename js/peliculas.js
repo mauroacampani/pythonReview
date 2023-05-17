@@ -16,7 +16,7 @@ const cargarPeliculas = async() => {
         <div class="content">
         <table width="100%" cellspacing="0">
         <tr>
-				<td><img src="img/star.png" width="" height="20"></img></td>
+				<td><img src="img/star.png" width="20" height="20"></img></td>
 				<td>${pelicula.vote_average}</td>
 			</tr>
             <tr>
