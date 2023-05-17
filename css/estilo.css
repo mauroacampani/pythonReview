@@ -31,7 +31,6 @@ nav {
 }
 
 
-
 ul {
     list-style-type: none;
 }
@@ -58,7 +57,7 @@ a:hover {
     
   }
   
-  /* Mobile menu */
+
 .menu {
     display: flex;
     flex-wrap: wrap;
@@ -87,7 +86,8 @@ a:hover {
 .active {
     display: block;
   }
-  /* Tablet menu */
+
+
  @media all and (min-width: 600px) {
 .menu {
       justify-content: center;
@@ -106,7 +106,7 @@ a:hover {
    
   }
   
-  /* Desktop menu */
+
 @media all and (min-width: 900px) {
 .item {
       display: block;
@@ -134,7 +134,7 @@ a:hover {
 
   
 header {
-	padding: 60px 0;
+  display: block;
 }
 
 #boton-inicio {
@@ -167,3 +167,118 @@ footer {
   text-align: center;
   padding-top: 5px;
 }
+
+
+/* ---- ----- ----- Contenedor Titulo y Controles ----- ----- ----- */
+.contenedor-titulo-controles {
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.contenedor-titulo-controles h3 {
+	color: #fff;
+	font-size: 30px;
+}
+
+
+
+/* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
+.peliculas-novedades {
+	margin-bottom: 70px;
+    width: 90%;
+    
+}
+
+
+.peliculas-novedades .contenedor-principal {
+	display: flex;
+	align-items: center;
+	position: relative;
+    
+}
+
+.peliculas-novedades .contenedor-principal .flecha-izquierda,
+.peliculas-novedades .contenedor-principal .flecha-derecha {
+	position: absolute;
+	border: none;
+	background: rgba(0,0,0,0.3);
+	font-size: 40px;
+	height: 30%;
+	top: calc(60% - 25%);
+	line-height: 40px;
+	width: 30px;
+	color: #fff;
+	cursor: pointer;
+	z-index: 500;
+	transition: .2s ease all;
+	
+}
+
+.peliculas-novedades .contenedor-principal .flecha-izquierda:hover,
+.peliculas-novedades .contenedor-principal .flecha-derecha:hover {
+	background: rgba(0,0,0, .9);
+}
+
+.peliculas-novedades .contenedor-principal .flecha-izquierda {
+	left: 0;
+}
+
+.peliculas-novedades .contenedor-principal .flecha-derecha {
+	right: 0;
+}
+
+
+.peliculas-novedades .contenedor-carousel {
+	width: 100%;
+	padding: 20px 0;
+	overflow: hidden;
+	scroll-behavior: smooth;
+    
+}
+
+
+/* ---- ----- ----- Media Queries ----- ----- ----- */
+@media screen and (max-width: 800px) {
+	header .logotipo {
+		margin-bottom: 10px;
+		font-size: 30px;
+	}
+
+	header .contenedor {
+		flex-direction: column;
+		text-align: center;
+	}
+
+
+
+	.peliculas-novedades .contenedor-carousel {
+		overflow: visible;
+	}
+
+	.peliculas-novedades .contenedor-carousel .carousel {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+	}
+
+	.peliculas-novedades .flecha-izquierda,
+	.peliculas-novedades .flecha-derecha {
+		display: none;
+	}
+}
+
+
+
+  section{
+    position: relative;  
+    height: 700px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+
+
+
+  
