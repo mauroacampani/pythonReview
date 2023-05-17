@@ -13,3 +13,13 @@ const menu = document.querySelectorAll('.item');
   });
  
 });
+
+
+document.getElementById('flecha-derecha').onclick = function(){
+  const widthItem = document.querySelector('.card').offsetWidth;
+  document.getElementById('formList').scrollLeft += widthItem;
+}
+document.getElementById('flecha-izquierda').onclick = function(){
+  const widthItem = document.querySelector('.card').offsetWidth;
+  document.getElementById('formList').scrollLeft -= widthItem;
+}
