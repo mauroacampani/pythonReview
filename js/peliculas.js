@@ -2,6 +2,7 @@ let pagina = 1;
 const btnAnterior = document.getElementById('btnAnterior');
 const btnSiguiente = document.getElementById('btnSiguiente');
 
+//PASA A LA SIGUENTE PAGINA DE PELICULAS
 btnSiguiente.addEventListener('click', () => {
 	if(pagina < 1000){
 		pagina += 1;
@@ -9,6 +10,7 @@ btnSiguiente.addEventListener('click', () => {
 	}
 });
 
+//RETROCEDE A LA PAGINA ANTERIROR DE PELICULAS
 btnAnterior.addEventListener('click', () => {
 	if(pagina > 1){
 		pagina -= 1;
@@ -16,6 +18,7 @@ btnAnterior.addEventListener('click', () => {
 	}
 });
 
+//CARGA LAS PELICULAS TENDENCIAS
 const cargarPeliculas = async() => {
     try{
 
@@ -27,11 +30,17 @@ const cargarPeliculas = async() => {
     
     let peliculas = '';
 
+    //CREA LOS CARD DE LAS PELICULAS
     datos.results.forEach(pelicula => {
         peliculas += `
         <div class="card">
+        
+        <a class="boton" href="#" onclick='obtenerVideo(${pelicula.id}, "${pelicula.title}", "${pelicula.overview}");'><i class="fas fa-eye"></i></a>
+
+       
         <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="avatar">
         <div class="content">
+        
         <table width="100%" cellspacing="0">
         <tr>
 				<td><img src="img/star.png" width="20" height="20"></img></td>
@@ -41,6 +50,7 @@ const cargarPeliculas = async() => {
                 <td style="text-align: left;"><p>${pelicula.title}</p></td>
                
             </tr>
+
             
         </table>
     </div>
@@ -62,6 +72,7 @@ let paginaSeries = 1;
 const btnAnteriorSeries = document.getElementById('btnAnteriorSeries');
 const btnSiguienteSeries = document.getElementById('btnSiguienteSeries');
 
+//PASA A LA SIGUENTE PAGINA DE SERIES
 btnSiguienteSeries.addEventListener('click', () => {
 	if(paginaSeries < 1000){
 		paginaSeries += 1;
@@ -69,6 +80,7 @@ btnSiguienteSeries.addEventListener('click', () => {
 	}
 });
 
+//RETROCEDE A LA PAGINA ANTERIOR DE LAS SERIES
 btnAnteriorSeries.addEventListener('click', () => {
 	if(paginaSeries > 1){
 		paginaSeries -= 1;
@@ -76,6 +88,7 @@ btnAnteriorSeries.addEventListener('click', () => {
 	}
 });
 
+//OBTIENE LAS SERIES TENDENCIAS
 const cargarSeries = async() => {
     try{
 
@@ -88,6 +101,7 @@ const cargarSeries = async() => {
     
     let series = '';
     
+    //CREAR LOS CARD DE LAS SERIES
     datosSeries.results.forEach(serie => {
         
         series += `
@@ -118,3 +132,70 @@ const cargarSeries = async() => {
 }
 
 cargarSeries()
+
+
+//OBTNIENE VIDEO Y SINOPSIS
+const obtenerVideo = async(id, name, sinopsis) => {
+    try{
+
+    
+    const respuesta =  await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=a60070faf034ecaa57adbea4299c3a88&append_to_response=videos`)
+    
+    
+    let trailerSinopsis = '';
+    const dataVideos = await respuesta.json()
+    
+    
+    const trailer = dataVideos.videos.results.find(
+        (vid) => vid.name === "Official Trailer"
+        
+      );
+
+      //INSERTA HTML EN EL MODAL
+      trailerSinopsis += `
+
+      <h2>${name}</h2>
+      <h3>Trailer</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
+      <h3>Sinopsis</h3>
+      <p>${sinopsis}</p>
+      `;
+        
+      
+      
+          document.getElementById('modalContent').innerHTML = trailerSinopsis;
+
+          
+
+
+
+  
+
+}catch(error){
+    console.log(error)
+}
+
+//MODAL TRAILER Y SINOPSIS
+var modal = document.getElementById('myModal');
+var closeBtn = modal.getElementsByClassName('close')[0];
+
+//MUESTRA EL MODAL
+  modal.style.display = 'block';
+
+//CIERRA MODAL Y RECARGA LA PAGINA
+closeBtn.addEventListener('click', function() {
+  modal.style.display = 'none';
+  window.location.reload()
+});
+
+
+
+}
+
+
+
+
+
+
+
+
