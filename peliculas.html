@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 
-<body>
+<body >
     <header>
         <div class="contenedor">
         <nav>
@@ -17,7 +17,6 @@
             <ul class="menu">
                 <li class="logo"><a href="#"><img src="img/logo.jpg" alt="" ></a></li>
                 <li class="item"><a  href="index.html">Inicio</a></li>
-                <li class="item"><a  href="trailers.html">Trailers</a></li>
                 <li class="item"><a  href="peliculas.html">Películas</a></li>
                 <li class="item"><a  href="series.html">Series</a></li>
                 <li class="item"><a  href="contacto.html">Contacto</a></li>
@@ -28,9 +27,72 @@
     </div>
     </header>
 
+	<main >
+
+	<div class="pelicula" id="pp">
+		
+	  </div>
+</main>
+
     <section>
-      
+		
+
+        <div class="peliculas-novedades contenedor">
+			<div class="contenedor-titulo-controles">
+				<h3>Top 10 mas valoradas</h3>
 				
+			</div>
+
+			<div class="contenedor-principal">
+				
+				<div id="formListVistas" >
+					<div id="listVistas" class="contenedor-carousel">
+						
+
+					</div>
+				</div>
+				
+		
+			</div>
+	
+
+			<div class="contenedor-titulo-controles">
+				<h3>Novedades</h3>
+				
+			</div>
+
+			<div class="contenedor-principal">
+				<button role="button" id="flecha-izquierdaNov" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>
+				<div id="formListNov" >
+					<div id="listNov" class="contenedor-carousel">
+						
+
+					</div>
+				</div>
+				
+				
+
+				<button role="button" id="flecha-derechaNov" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>
+				
+			</div>
+			<div class="paginacion">
+				<button id="btnAnteriorNov">Ant.</button>
+				<button id="btnSiguienteNov">Sig.</button>
+			</div>
+		
+            
+		</div>
+
+		
+      
+		 <div id="myModal" class="modal">
+			<div class="modal-content">
+			  <span class="close">&times;</span>
+			  <div id="modalContent">
+
+			  </div>
+			</div>
+		  </div> 
 		
 			
 		
@@ -51,7 +113,7 @@
         </footer>
     
         <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-	<script src="js/main.js"></script>
- 
+        <script src="js/main.js"></script>
+    <script src="js/peliculas.js"></script>
 </body>
 </html>

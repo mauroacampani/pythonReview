@@ -1,53 +1,79 @@
-let pagina = 1;
-const btnAnterior = document.getElementById('btnAnterior');
-const btnSiguiente = document.getElementById('btnSiguiente');
+
+let paginaNov = 1;
+const btnAnteriorNov = document.getElementById('btnAnteriorNov');
+const btnSiguienteNov = document.getElementById('btnSiguienteNov');
+
 
 //PASA A LA SIGUENTE PAGINA DE PELICULAS
-btnSiguiente.addEventListener('click', () => {
-	if(pagina < 1000){
-		pagina += 1;
-		cargarPeliculas();
+btnSiguienteNov.addEventListener('click', () => {
+	if(paginaNov < 1000){
+		paginaNov += 1;
+        let url = 'https://api.themoviedb.org/3/movie/now_playing';
+    let html = 'listNov'
+    cargarPeliculasNov(url, html);
+		
 	}
 });
 
 //RETROCEDE A LA PAGINA ANTERIROR DE PELICULAS
-btnAnterior.addEventListener('click', () => {
-	if(pagina > 1){
-		pagina -= 1;
-		cargarPeliculas();
+btnAnteriorNov.addEventListener('click', () => {
+	if(paginaNov > 1){
+		paginaNov -= 1;
+		let url = 'https://api.themoviedb.org/3/movie/now_playing';
+    let html = 'listNov'
+    cargarPeliculasNov(url, html);
 	}
 });
 
+
+
+function load() {
+    
+    let url = 'https://api.themoviedb.org/3/movie/now_playing';
+    let html = 'listNov'
+    cargarPeliculasNov(url, html);
+
+    url = 'https://api.themoviedb.org/3/movie/top_rated';
+    html = 'listVistas'
+    cargarMasVistas(url, html);
+     
+  }
+  
+document.addEventListener("DOMContentLoaded", load, false);
+
+
 //CARGA LAS PELICULAS TENDENCIAS
-const cargarPeliculas = async() => {
+const cargarPeliculasNov = async(url, html) => {
+ 
+
     try{
 
     
-    const respuesta =  await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=${pagina}`)
-    console.log(respuesta)
-
-    const datos = await respuesta.json()
+    const respuestaNov =  await fetch(`${url}?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=${paginaNov}`)
     
-    let peliculas = '';
+    const datosNov = await respuestaNov.json()
+  
+    let peliculasNov = '';
 
     //CREA LOS CARD DE LAS PELICULAS
-    datos.results.forEach(pelicula => {
-        peliculas += `
+    datosNov.results.forEach(peliculaNov => {
+        
+        peliculasNov += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${pelicula.id}, "${pelicula.title}", "${pelicula.overview}");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview}", "movie");'><i class="fas fa-eye"></i></a>
 
        
-        <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="avatar">
+        <img src="https://image.tmdb.org/t/p/w500/${peliculaNov.poster_path}" class="avatar">
         <div class="content">
         
         <table width="100%" cellspacing="0">
         <tr>
 				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${pelicula.vote_average}</td>
+				<td>${peliculaNov.vote_average}</td>
 			</tr>
             <tr>
-                <td style="text-align: left;"><p>${pelicula.title}</p></td>
+                <td style="text-align: left;"><p>${peliculaNov.title}</p></td>
                
             </tr>
 
@@ -58,144 +84,129 @@ const cargarPeliculas = async() => {
     `;
     });
 
-    document.getElementById('list').innerHTML = peliculas;
+    document.getElementById(html).innerHTML = peliculasNov;
+
 
 }catch(error){
     console.log(error)
 }
 }
 
-cargarPeliculas()
 
 
-let paginaSeries = 1;
-const btnAnteriorSeries = document.getElementById('btnAnteriorSeries');
-const btnSiguienteSeries = document.getElementById('btnSiguienteSeries');
 
-//PASA A LA SIGUENTE PAGINA DE SERIES
-btnSiguienteSeries.addEventListener('click', () => {
-	if(paginaSeries < 1000){
-		paginaSeries += 1;
-		cargarSeries();
-	}
-});
+//CARGA LAS PELICULAS TENDENCIAS
+const cargarMasVistas = async(url, html) => {
+ 
 
-//RETROCEDE A LA PAGINA ANTERIOR DE LAS SERIES
-btnAnteriorSeries.addEventListener('click', () => {
-	if(paginaSeries > 1){
-		paginaSeries -= 1;
-		cargarSeries();
-	}
-});
-
-//OBTIENE LAS SERIES TENDENCIAS
-const cargarSeries = async() => {
     try{
 
     
-    const respuesta =  await fetch(`https://api.themoviedb.org/3/trending/tv/day?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=${paginaSeries}`)
+    const respuestaNov =  await fetch(`${url}?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=${paginaNov}`)
     
-    
+    const datosNov = await respuestaNov.json()
+        let i = 1;
+    let peliculasNov = '';
 
-    const datosSeries = await respuesta.json()
-    
-    let series = '';
-    
-    //CREAR LOS CARD DE LAS SERIES
-    datosSeries.results.forEach(serie => {
+    //CREA LOS CARD DE LAS PELICULAS
+    datosNov.results.slice(0, 10).forEach(peliculaNov => {
         
-        series += `
+        peliculasNov += `
         <div class="card">
-        <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" class="avatar">
+        
+        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview}", "movie");'><i class="fas fa-eye"></i></a>
+        <a class="botonRan" href="#">${i}</a>
+       
+        <img src="https://image.tmdb.org/t/p/w500/${peliculaNov.poster_path}" class="avatar">
         <div class="content">
+        
         <table width="100%" cellspacing="0">
         <tr>
-				<td><img src="img/star.png" width="" height="20"></img></td>
-				<td>${serie.vote_average}</td>
+				<td><img src="img/star.png" width="20" height="20"></img></td>
+				<td>${peliculaNov.vote_average}</td>
 			</tr>
             <tr>
-                <td style="width: 100%;"><p>${serie.original_name}</p></td>
+                <td style="text-align: left;"><p>${peliculaNov.title}</p></td>
                
             </tr>
+
             
         </table>
     </div>
         </div>
     `;
+    i += 1;
     });
 
-    document.getElementById('listSeries').innerHTML = series;
+    document.getElementById(html).innerHTML = peliculasNov;
+
 
 }catch(error){
     console.log(error)
 }
 }
 
-cargarSeries()
+document.getElementById('flecha-derechaNov').onclick = function(){
+    const widthItem = document.querySelector('.card').offsetWidth;
+    document.getElementById('formListNov').scrollLeft += widthItem;
+  }
+  document.getElementById('flecha-izquierdaNov').onclick = function(){
+    const widthItem = document.querySelector('.card').offsetWidth;
+    document.getElementById('formListNov').scrollLeft -= widthItem;
+  }
 
 
-//OBTNIENE VIDEO Y SINOPSIS
-const obtenerVideo = async(id, name, sinopsis) => {
+
+  //CARGA LAS PELICULAS TENDENCIAS
+const peliculaPrincipal = async() => {
+
+    let arrRan = []
+    
     try{
 
+    const ran = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=1`)
+
+    const datosRan = await ran.json()
+
+    datosRan.results.forEach(peliculaRan => {
+        arrRan.push(peliculaRan.id)
+    });
+    var rand = Math.floor(Math.random()*arrRan.length);
+    var rValue = arrRan[rand];
+    console.log(rValue)
     
-    const respuesta =  await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=a60070faf034ecaa57adbea4299c3a88&append_to_response=videos`)
+    const respuestaNov =  await fetch(`https://api.themoviedb.org/3/movie/${rValue}?api_key=a60070faf034ecaa57adbea4299c3a88`)
     
-    
-    let trailerSinopsis = '';
-    const dataVideos = await respuesta.json()
-    
-    
-    const trailer = dataVideos.videos.results.find(
-        (vid) => vid.name === "Official Trailer"
+    const datosPrin = await respuestaNov.json()
+       
+    let peliculasPrin = '';
+
+    //CREA LOS CARD DE LAS PELICULAS
+
         
-      );
+        peliculasPrin += `
+       
+        <img src="https://image.tmdb.org/t/p/original/${datosPrin.backdrop_path}" alt="">
 
-      //INSERTA HTML EN EL MODAL
-      trailerSinopsis += `
-
-      <h2>${name}</h2>
-      <h3>Trailer</h3>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
-      <h3>Sinopsis</h3>
-      <p>${sinopsis}</p>
-      `;
-        
-      
-      
-          document.getElementById('modalContent').innerHTML = trailerSinopsis;
-
-          
+        <div class="pelicula-content">
+        <h3 class="titulo">${datosPrin.title}</h3>
+    <p>${datosPrin.overview}</p>
+    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.title}", "${datosPrin.overview}", "movie");' class="boton"><i class="fas fa-play"></i>Reproducir</button>
+  </div>
+    
+    `;
 
 
 
-  
+    document.getElementById('pp').innerHTML = peliculasPrin;
+
 
 }catch(error){
     console.log(error)
 }
-
-//MODAL TRAILER Y SINOPSIS
-var modal = document.getElementById('myModal');
-var closeBtn = modal.getElementsByClassName('close')[0];
-
-//MUESTRA EL MODAL
-  modal.style.display = 'block';
-
-//CIERRA MODAL Y RECARGA LA PAGINA
-closeBtn.addEventListener('click', function() {
-  modal.style.display = 'none';
-  window.location.reload()
-});
-
-
-
 }
 
+peliculaPrincipal()
+setInterval(peliculaPrincipal, 15000)
 
-
-
-
-
-
-
+ 

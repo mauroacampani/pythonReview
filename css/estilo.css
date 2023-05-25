@@ -103,7 +103,7 @@ a:hover {
 .toggle {
       order: 2;
     }
-
+   
   }
   
 
@@ -192,8 +192,9 @@ p{
 
 
 /* ---- ----- ----- Contenedor Peliculas y Flechas ----- ----- ----- */
+
 .peliculas-novedades {
-	margin-top: 120px;
+	position: relative;
     width: 90%;
     margin-bottom: 70px;
 }
@@ -274,10 +275,11 @@ p{
 
   section{
     position: relative;  
-    
+    margin-top: 100px;
     width: 100%;
     display: flex;
     align-items: center;
+
   }
   
 /* ---- ----- ----- Card de las peliculas y series ----- ----- ----- */
@@ -323,6 +325,16 @@ p{
   
 }
 
+.card .botonRan{
+  background-color: #03000a;
+    color: #ffffff; 
+    position: absolute;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
 .card .boton:hover{
   background-color: #8b5efc;
   
@@ -342,11 +354,11 @@ p{
 
 
 
-#list, #listSeries{
+#list, #listSeries, #listNov, #listVista{
   display: flex;
   width:max-content;
 }
-#formList, #formListSeries {
+#formList, #formListSeries, #formListNov {
   width:1200px;
   max-width: 100%;
   overflow: auto;
@@ -354,7 +366,17 @@ p{
   scroll-behavior: smooth;
   scroll-snap-type: both;
 }
-#formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar{
+
+#formListVistas {
+  /* width:1200px; */
+  /* max-width: 100%; */
+  overflow: auto;
+  margin:10px 50px 10px;
+  scroll-behavior: smooth;
+  scroll-snap-type: both;
+}
+
+#formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar , #formListNov::-webkit-scrollbar, #formListVista::-webkit-scrollbar{
   display: none;
 }
 
@@ -375,11 +397,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-align: center;
-/* height: 20px;
-width: 100px; */
-/* background: #230966; */
 color: #fff;
-/* border-radius: 100px; */
 width:50px;
   height:50px;
 transition: .3s ease all;
@@ -398,6 +416,37 @@ transition: .3s ease all;
 background: #362464;
 }
 
+@media screen and (max-width: 800px) {
+  #formListVista {
+    width:1200px;
+    max-width: 100%;
+    overflow: auto;
+    margin:10px auto 10px;
+    scroll-behavior: smooth;
+    scroll-snap-type: both;
+  }
+
+  #listVistas{
+    display: flex;
+    width:max-content;
+  }
+ 
+  #formListVista::-webkit-scrollbar{
+    display: none;
+  }
+
+  
+
+}
+
+@media screen and (min-width: 1370px) {
+  #formList, #formListSeries, #formListNov {
+    width: 2700px;
+
+  }
+
+}
+
 @media screen and (max-width: 768px) {
   .modal {
     margin-top: 90px;
@@ -408,6 +457,14 @@ background: #362464;
     width: 540px;
     height: 250px;
   }
+
+
+
+  .pelicula {
+    height: 70vh; 
+  }
+
+
 }
 
 @media screen and (max-width: 480px) {
@@ -426,6 +483,17 @@ background: #362464;
     width: 250px;
     height: 150px;
   }
+  
+
+  .pelicula p{
+    display: none;
+  }
+  
+  .pelicula {
+    height: 50vh; /* Ajusta la altura del slider para pantallas más pequeñas */
+  }
+
+  
 }
 
 /* ---- ----- ----- Modal de trailers y sinopsis ----- ----- ----- */
@@ -463,5 +531,66 @@ background: #362464;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+.pelicula {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+  margin-top: 90px;
+}
+
+.pelicula-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+}
+
+.pelicula-content .titulo {
+  font-weight: 600;
+	font-size: 2.12em;
+	margin-bottom: 0.4em;
+}
+
+.pelicula-content p {
+  margin: 0 0 10px;
+  font-weight: normal;
+	font-size: 1em;
+	line-height: 1.75em;
+	max-width: 50%;
+	margin-bottom: 1.25em;
+}
+
+.pelicula-content button {
+  display: inline-block;
+  background: rgba(0,0,0, 0.5);
+	border: none;
+	border-radius: 0.31em;
+	padding: 0.93em 1em;
+	color: #fff;
+	margin-right: 1.25em;
+	cursor: pointer;
+	transition: .3s ease all;
+	font-size: 1em;
+  margin-bottom: 1em;
+}
+
+.pelicula-content button:hover {
+	background: #fff;
+	color: #000;
+}
+
+.pelicula-content button i {
+	margin-right: 1.25em;
+}
+
+
+.pelicula img {
+	width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
 }
 
