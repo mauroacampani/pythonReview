@@ -323,6 +323,7 @@ p{
     border: none;
     border-radius: 10px;
     position: absolute;
+    opacity: 0.8;
   
 }
 
@@ -355,11 +356,11 @@ p{
 
 
 
-#list, #listSeries, #listNov, #listVista{
+#list, #listSeries, #listNov, #listVista, #listNovSerie, #listVistaSerie{
   display: flex;
   width:max-content;
 }
-#formList, #formListSeries, #formListNov {
+#formList, #formListSeries, #formListNov, #formListNovSerie {
   width:1200px;
   max-width: 100%;
   overflow: auto;
@@ -368,7 +369,7 @@ p{
   scroll-snap-type: both;
 }
 
-#formListVistas {
+#formListVistas, #formListVistasSerie {
   /* width:1200px; */
   /* max-width: 100%; */
   overflow: auto;
@@ -377,7 +378,7 @@ p{
   scroll-snap-type: both;
 }
 
-#formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar , #formListNov::-webkit-scrollbar, #formListVista::-webkit-scrollbar{
+#formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar , #formListNov::-webkit-scrollbar, #formListVista::-webkit-scrollbar, #formListNovSerie::-webkit-scrollbar{
   display: none;
 }
 
@@ -418,7 +419,7 @@ background: #362464;
 }
 
 @media screen and (max-width: 800px) {
-  #formListVista {
+  #formListVista, #formListVistaSerie {
     width:1200px;
     max-width: 100%;
     overflow: auto;
@@ -427,12 +428,12 @@ background: #362464;
     scroll-snap-type: both;
   }
 
-  #listVistas{
+  #listVistas, #listVistasSerie{
     display: flex;
     width:max-content;
   }
  
-  #formListVista::-webkit-scrollbar{
+  #formListVista::-webkit-scrollbar, #formListVistaSerie::-webkit-scrollbar{
     display: none;
   }
 
@@ -441,7 +442,7 @@ background: #362464;
 }
 
 @media screen and (min-width: 1370px) {
-  #formList, #formListSeries, #formListNov {
+  #formList, #formListSeries, #formListNov, #formListNovSerie {
     width: 2700px;
 
   }
