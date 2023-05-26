@@ -498,27 +498,60 @@ background: #362464;
 }
 
 /* ---- ----- ----- Modal de trailers y sinopsis ----- ----- ----- */
-.modal {
+ .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 600px;
+
+max-width: 700px;
+    position: relative;
+
+    animation-name: modal;
+    animation-duration: 1s;
+    border-radius:10px;
+
 }
 
+@keyframes modal{
+	from{top:-330px; opacity:0;}
+	to{top:0; opacity:1;}
+}
+
+.modal-content .title {
+ text-align: center;
+
+}
+
+.modal-content .trailer {
+  text-align: center;
+  width: 100%;
+  height: 280px;
+ }
+
+ .modal-content .trailer iframe {
+ 
+  width: 100%;
+  height: 100%;
+ }
+
+/*
 .close {
   color: #aaa;
   float: right;
@@ -532,8 +565,74 @@ background: #362464;
   color: black;
   text-decoration: none;
   cursor: pointer;
+} */
+
+/* .modal {
+  display: none;
+ 
+
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  position: fixed;
+  font-family: Arial, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+} */
+/* .modal:target {
+  opacity:1;
+  pointer-events: auto;
+} */
+
+/* .modal-content{
+  width: 80%;
+  position: relative;
+  padding: 5px 20px 13px 20px;
+  background: #fff;
+  border-radius:3px;
+  -webkit-transition: all 500ms ease-in;
+  -moz-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+   
+} */
+
+/* .movedown {
+  margin: 0 auto;
 }
 
+.modal:target .movedown{       
+  margin:10% auto;
+} */
+
+.close {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: 1px;
+  text-align: center;
+  top: 1px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius:10px;
+
+}
+
+.close:hover {
+  background: #53514f;
+  color:#222;
+}
 
 .pelicula {
   position: relative;

@@ -208,9 +208,13 @@ async function obtenerVideo(id, name, sinopsis, tipo){
     //INSERTA HTML EN EL MODAL
     trailerSinopsis += `
 
+    <div class="title">
     <h2>${name}</h2>
-    <h3>Trailer</h3>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <h4>Trailer</h4>
+    <div class="trailer">
+    <iframe src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
+    </div>
     <h3>Sinopsis</h3>
     <p>${sinopsis}</p>
     `;
