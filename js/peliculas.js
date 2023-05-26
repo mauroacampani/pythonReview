@@ -191,7 +191,7 @@ const peliculaPrincipal = async() => {
         <div class="pelicula-content">
         <h3 class="titulo">${datosPrin.title}</h3>
     <p>${datosPrin.overview}</p>
-    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.title}", "${datosPrin.overview}", "movie");' class="boton"><i class="fas fa-play"></i>Reproducir</button>
+    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.title}", "${datosPrin.overview}", "movie");' class="boton"><i class="fas fa-play"></i>Información</button>
   </div>
     
     `;

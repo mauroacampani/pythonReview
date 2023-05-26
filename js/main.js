@@ -215,7 +215,7 @@ async function obtenerVideo(id, name, sinopsis, tipo){
     </div>
     <h4>Trailer</h4>
     <div id="tra" class="trailer">
-    <iframe src="https://www.youtube.com/embed/${video}" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/${video}?enablejsapi=1" id="videoFrame" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="noTra"  style="display: none;">
     <p>Traile no disponible</p>
@@ -268,13 +268,46 @@ var closeBtn = modal.getElementsByClassName('close')[0];
 
 //MUESTRA EL MODAL
 modal.style.display = 'block';
-
+loadYouTubePlayer();
 //CIERRA MODAL Y RECARGA LA PAGINA
 closeBtn.addEventListener('click', function() {
+
 modal.style.display = 'none';
-window.location.reload()
+// window.location.reload()
+detenerVideo();
+
 });
 
 
+}
 
+
+function loadYouTubePlayer() {
+  if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    window.onYouTubeIframeAPIReady = function() {
+      createYouTubePlayer();
+    };
+  } else {
+    createYouTubePlayer();
+  }
+}
+
+function createYouTubePlayer() {
+  player = new YT.Player('videoFrame', {
+    events: {
+      'onReady': onYouTubePlayerReady
+    }
+  });
+}
+
+function onYouTubePlayerReady() {
+  player.stopVideo(); // Detiene el video cuando el reproductor está listo
+}
+
+function detenerVideo() {
+  player.stopVideo();
 }
