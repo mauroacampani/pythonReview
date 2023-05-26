@@ -177,6 +177,7 @@ cargarSeries()
 
 //OBTNIENE VIDEO Y SINOPSIS
 async function obtenerVideo(id, name, sinopsis, tipo){
+ 
 // const obtenerVideo = async() => {
 
   try{
@@ -188,32 +189,36 @@ async function obtenerVideo(id, name, sinopsis, tipo){
   let trailerSinopsis = '';
   const dataVideos = await respuesta.json()
   
-  
-  //if (dataVideos.videos && dataVideos.videos.results) {
-    
+  //SI HAY VIDEOS 
+  if (dataVideos.videos.results !="") {
+
+  //BUSCA EL TRAILER OFICIAL
   const trailer = dataVideos.videos.results.find(
       (vid) => vid.name === "Official Trailer"
       
     );
 
-  //   if(trailer == "undefined") {
-  //     alert('sdsa')
-  //     trailer = dataVideos.videos.results[0]
-  // }
+    //SI ENCONTRO EL TARILER OFICIAL SINO BUSCA EL PRIMER VIDEO QUE SE ENCUENTRE DISPONIBLE
+    if (trailer){
       
-  
-
-  //}
+      video = trailer.key
+    }else{
+      
+      video = dataVideos.videos.results[0].key
+    }
     
-    //INSERTA HTML EN EL MODAL
+    //INSERTA HTML EN EL MODAL CON EL TRAILER
     trailerSinopsis += `
 
     <div class="title">
     <h2>${name}</h2>
     </div>
     <h4>Trailer</h4>
-    <div class="trailer">
-    <iframe src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
+    <div id="tra" class="trailer">
+    <iframe src="https://www.youtube.com/embed/${video}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="noTra"  style="display: none;">
+    <p>Traile no disponible</p>
     </div>
     <h3>Sinopsis</h3>
     <p>${sinopsis}</p>
@@ -221,11 +226,35 @@ async function obtenerVideo(id, name, sinopsis, tipo){
       
     
     
-        document.getElementById('modalContent').innerHTML = trailerSinopsis;
+      
+  
 
+  }else{ 
+    
+    //INSERTA HTML EN EL MODAL SIN EL TRAILER
+    trailerSinopsis += `
+
+    <div class="title">
+    <h2>${name}</h2>
+    </div>
+    <h4>Trailer</h4>
+    <div id="noTra">
+    <p>Traile no disponible</p>
+    </div>
+    <h3>Sinopsis</h3>
+    <p>${sinopsis}</p>
+    `;
+      
+    
+    
+     
+  }
+    
+  
+
+  document.getElementById('modalContent').innerHTML = trailerSinopsis;
         
-
-
+  
 
 
 
