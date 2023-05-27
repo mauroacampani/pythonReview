@@ -633,3 +633,48 @@ max-width: 700px;
   opacity: 0.7;
 }
 
+.contenedor-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap:2em;
+}
+
+.rating {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse ;
+  padding: .5em 1em;
+ }
+
+
+.rating input {
+  position: relative;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  
+}
+
+.rating input::before {
+  content: '\f005';
+  position: absolute;
+  font-family: fontAwesome;
+  font-size: 1.6em;
+  color: #111;
+  transition: .5s;
+}
+
+.rating input:hover ~ input::before,
+.rating input:hover::before,
+.rating input:checked~ input::before,
+.rating input:checked::before {
+  color: var(--c);
+
+}

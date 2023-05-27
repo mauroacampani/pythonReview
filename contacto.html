@@ -8,6 +8,7 @@
     <title>Contacto</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -30,32 +31,57 @@
         </div>
         </header>
         <main>
-            <form>
+            <form action="enviar.php" method="POST">
                 <p>
-                    Dejanos saber tu consulta:
+                    <br><br><br><br><br>
+                    <h2>Envianos tu Reseña:</h2>
+                    <br>
                 </p>
                 <p>
-                    <label for="nombre">
+                    <label for="nombre" >
                         Nombre:
-                        <input type="text" name="nombre">
+                        <input type="text" name="nombre" title="Ingrese su nombre" required>
                     </label>
                 </p>
+                <br>
                 <p>
                     <label for="email">
                         Email:
-                        <input type="email" name="email">
+                        <input type="email" name="email" title="Ingrese un email" required>
                     </label>
                 </p>
+                <br>
                 <p>
-                    <label for="mensaje">
-                        Mensaje:
-                        <textarea name="mensaje"></textarea>
+                    <label for="pelicula/serie">
+                        Nombre de Película/Serie:
+                        <input type="text" name="email" required>
+                    </label>
+                </p>
+                <br>
+                <p>Califica la Película/Serie:</p>
+                    <div class="contenedor-form">
+                        <div class="rating">
+                            <input type="radio" name="star1" style="--c:#ff9933">
+                            <input type="radio" name="star1" style="--c:#ff9933">
+                            <input type="radio" name="star1" style="--c:#ff9933">
+                            <input type="radio" name="star1" style="--c:#ff9933">
+                            <input type="radio" name="star1" style="--c:#ff9933">
+                        </div>    
+                
+                <p></p>
+                        
+                    </div> 
+                <p>
+                    <label for="Reseña">
+                        Comentarios:
+                        <textarea name="mensaje" required></textarea>
                     </label>
                 </p>
                 <p>
                     <button type="submit">Send</button>
                 </p>
             </form>
+
         </main>
         <footer>
             <section>
