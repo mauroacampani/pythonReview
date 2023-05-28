@@ -1,3 +1,16 @@
+function load() {
+    
+    let url = 'https://api.themoviedb.org/3/movie/now_playing';
+    let html = 'listNov'
+    cargarPeliculasNov(url, html);
+
+    url = 'https://api.themoviedb.org/3/movie/top_rated';
+    html = 'listVistas'
+    cargarMasVistas(url, html);
+     
+  }
+  
+document.addEventListener("DOMContentLoaded", load, false);
 
 let paginaNov = 1;
 const btnAnteriorNov = document.getElementById('btnAnteriorNov');
@@ -27,21 +40,6 @@ btnAnteriorNov.addEventListener('click', () => {
 
 
 
-function load() {
-    
-    let url = 'https://api.themoviedb.org/3/movie/now_playing';
-    let html = 'listNov'
-    cargarPeliculasNov(url, html);
-
-    url = 'https://api.themoviedb.org/3/movie/top_rated';
-    html = 'listVistas'
-    cargarMasVistas(url, html);
-     
-  }
-  
-document.addEventListener("DOMContentLoaded", load, false);
-
-
 //CARGA LAS PELICULAS TENDENCIAS
 const cargarPeliculasNov = async(url, html) => {
  
@@ -57,28 +55,19 @@ const cargarPeliculasNov = async(url, html) => {
 
     //CREA LOS CARD DE LAS PELICULAS
     datosNov.results.forEach(peliculaNov => {
-        
+        const fecha = convertirFecha(peliculaNov.release_date);
         peliculasNov += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview}", "movie");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview.replace(/['"]+/g, '')}", "movie");'><i class="fas fa-eye"></i></a>
 
        
         <img src="https://image.tmdb.org/t/p/w500/${peliculaNov.poster_path}" class="avatar">
         <div class="content">
         
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${peliculaNov.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="text-align: left;"><p>${peliculaNov.title}</p></td>
-               
-            </tr>
-
-            
-        </table>
+        <div><img src="img/star.png" width="" height="20"></img>${peliculaNov.vote_average}</div></br>
+        <div>${peliculaNov.title}</div></br>
+        <div class="fecha">${fecha}</div>
     </div>
         </div>
     `;
@@ -110,28 +99,22 @@ const cargarMasVistas = async(url, html) => {
 
     //CREA LOS CARD DE LAS PELICULAS
     datosNov.results.slice(0, 10).forEach(peliculaNov => {
+
+        const fecha = convertirFecha(peliculaNov.release_date);
         
         peliculasNov += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview}", "movie");'><i class="fas fa-eye"></i></a>
-        <a class="botonRan" href="#">${i}</a>
+        <a class="boton" href="#" onclick='obtenerVideo(${peliculaNov.id}, "${peliculaNov.title}", "${peliculaNov.overview.replace(/['"]+/g, '')}", "movie");'><i class="fas fa-eye"></i></a>
+        <a class="botonRan" href="#">#${i}</a>
        
         <img src="https://image.tmdb.org/t/p/w500/${peliculaNov.poster_path}" class="avatar">
         <div class="content">
         
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${peliculaNov.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="text-align: left;"><p>${peliculaNov.title}</p></td>
-               
-            </tr>
-
-            
-        </table>
+         
+        <div><img src="img/star.png" width="" height="20"></img>${peliculaNov.vote_average}</div></br>
+        <div>${peliculaNov.title}</div></br>
+        <div class="fecha">${fecha}</div>
     </div>
         </div>
     `;
@@ -172,10 +155,9 @@ const peliculaPrincipal = async() => {
         arrRan.push(peliculaRan.id)
     });
     var rand = Math.floor(Math.random()*arrRan.length);
-    var rValue = arrRan[rand];
-    console.log(rValue)
-    
-    const respuestaNov =  await fetch(`https://api.themoviedb.org/3/movie/${rValue}?api_key=a60070faf034ecaa57adbea4299c3a88`)
+    var peliRandom = arrRan[rand];
+   
+    const respuestaNov =  await fetch(`https://api.themoviedb.org/3/movie/${peliRandom}?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES`)
     
     const datosPrin = await respuestaNov.json()
        
@@ -191,14 +173,14 @@ const peliculaPrincipal = async() => {
         <div class="pelicula-content">
         <h3 class="titulo">${datosPrin.title}</h3>
     <p>${datosPrin.overview}</p>
-    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.title}", "${datosPrin.overview}", "movie");' class="boton"><i class="fas fa-play"></i>Información</button>
+    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.title}", "${datosPrin.overview.replace(/['"]+/g, '')}", "movie");' class="boton"><i class="fas fa-play"></i>Información</button>
   </div>
     
     `;
 
 
 
-    document.getElementById('pp').innerHTML = peliculasPrin;
+    document.getElementById('peliculasPrincipales').innerHTML = peliculasPrin;
 
 
 }catch(error){
@@ -207,6 +189,6 @@ const peliculaPrincipal = async() => {
 }
 
 peliculaPrincipal()
-setInterval(peliculaPrincipal, 15000)
+setInterval(peliculaPrincipal, 12000)
 
  

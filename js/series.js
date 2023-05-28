@@ -1,3 +1,16 @@
+function load() {
+    
+    let url = 'https://api.themoviedb.org/3/tv/airing_today';
+    let html = 'listNovSerie'
+    cargarSeriesNov(url, html);
+
+    url = 'https://api.themoviedb.org/3/tv/top_rated';
+    html = 'listVistasSerie'
+    cargarSeriesMasVistas(url, html);
+     
+  }
+  
+document.addEventListener("DOMContentLoaded", load, false);
 
 let paginaNov = 1;
 const btnAnteriorNov = document.getElementById('btnAnteriorNovSerie');
@@ -27,21 +40,6 @@ btnAnteriorNov.addEventListener('click', () => {
 
 
 
-function load() {
-    
-    let url = 'https://api.themoviedb.org/3/tv/airing_today';
-    let html = 'listNovSerie'
-    cargarSeriesNov(url, html);
-
-    url = 'https://api.themoviedb.org/3/tv/top_rated';
-    html = 'listVistasSerie'
-    cargarSeriesMasVistas(url, html);
-     
-  }
-  
-document.addEventListener("DOMContentLoaded", load, false);
-
-
 //CARGA LAS PELICULAS TENDENCIAS
 const cargarSeriesNov = async(url, html) => {
  
@@ -57,28 +55,21 @@ const cargarSeriesNov = async(url, html) => {
 
     //CREA LOS CARD DE LAS PELICULAS
     datosNov.results.forEach(serieNov => {
+
+        const fecha = convertirFecha(serieNov.first_air_date);
         
         seriesNov += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${serieNov.id}, "${serieNov.original_name}", "${serieNov.overview}", "tv");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${serieNov.id}, "${serieNov.name}", "${serieNov.overview.replace(/['"]+/g, '')}", "tv");'><i class="fas fa-eye"></i></a>
 
        
         <img src="https://image.tmdb.org/t/p/w500/${serieNov.poster_path}" class="avatar">
         <div class="content">
         
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${serieNov.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="text-align: left;"><p>${serieNov.original_name}</p></td>
-               
-            </tr>
-
-            
-        </table>
+        <div><img src="img/star.png" width="" height="20"></img>${serieNov.vote_average}</div></br>
+        <div>${serieNov.name}</div></br>
+        <div class="fecha">${fecha}</div>
     </div>
         </div>
     `;
@@ -110,28 +101,21 @@ const cargarSeriesMasVistas = async(url, html) => {
 
     //CREA LOS CARD DE LAS PELICULAS
     datosNov.results.slice(0, 10).forEach(serieNov => {
+
+        const fecha = convertirFecha(serieNov.first_air_date);
         
         seriesNov += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${serieNov.id}, "${serieNov.original_name}", "${serieNov.overview}", "tv");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${serieNov.id}, "${serieNov.name}", "${serieNov.overview.replace(/['"]+/g, '')}", "tv");'><i class="fas fa-eye"></i></a>
         <a class="botonRan" href="#">${i}</a>
        
         <img src="https://image.tmdb.org/t/p/w500/${serieNov.poster_path}" class="avatar">
         <div class="content">
         
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${serieNov.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="text-align: left;"><p>${serieNov.original_name}</p></td>
-               
-            </tr>
-
-            
-        </table>
+        <div><img src="img/star.png" width="" height="20"></img>${serieNov.vote_average}</div></br>
+        <div>${serieNov.name}</div></br>
+        <div class="fecha">${fecha}</div>
     </div>
         </div>
     `;
@@ -164,7 +148,7 @@ const seriePrincipal = async() => {
     
     try{
 
-    const ran = await fetch(`https://api.themoviedb.org/3/tv/airing_today?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=1`)
+    const ran = await fetch(`https://api.themoviedb.org/3/trending/tv/day?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES&page=1`)
 
     const datosRan = await ran.json()
 
@@ -172,10 +156,10 @@ const seriePrincipal = async() => {
         arrRan.push(serieRan.id)
     });
     var rand = Math.floor(Math.random()*arrRan.length);
-    var rValue = arrRan[rand];
-    console.log(rValue)
+    var serieRamdom = arrRan[rand];
+  
     
-    const respuestaNov =  await fetch(`https://api.themoviedb.org/3/tv/${rValue}?api_key=a60070faf034ecaa57adbea4299c3a88`)
+    const respuestaNov =  await fetch(`https://api.themoviedb.org/3/tv/${serieRamdom}?api_key=a60070faf034ecaa57adbea4299c3a88&language=es-ES`)
     
     const datosPrin = await respuestaNov.json()
        
@@ -189,16 +173,16 @@ const seriePrincipal = async() => {
         <img src="https://image.tmdb.org/t/p/original/${datosPrin.backdrop_path}" alt="">
 
         <div class="pelicula-content">
-        <h3 class="titulo">${datosPrin.original_name}</h3>
+        <h3 class="titulo">${datosPrin.name}</h3>
     <p>${datosPrin.overview}</p>
-    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.original_name}", "${datosPrin.overview}", "tv");' class="boton"><i class="fas fa-play"></i>Información</button>
+    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.name}", '${datosPrin.overview.replace(/['"]+/g, '')}', "tv");' class="boton"><i class="fas fa-play"></i>Información</button>
   </div>
     
     `;
 
 
 
-    document.getElementById('ss').innerHTML = seriesPrin;
+    document.getElementById('seriesPricipales').innerHTML = seriesPrin;
 
 
 }catch(error){

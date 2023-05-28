@@ -56,6 +56,14 @@ btnAnterior.addEventListener('click', () => {
 	}
 });
 
+function convertirFecha(fecha){
+  const fecha1 = new Date(fecha);
+  const formatoFecha = { day: '2-digit', month: 'short', year: 'numeric' };
+  const fechaFormateada = fecha1.toLocaleDateString('es-ES', formatoFecha);
+
+  return fechaFormateada;
+}
+
 //CARGA LAS PELICULAS TENDENCIAS
 const cargarPeliculas = async() => {
    
@@ -72,6 +80,9 @@ const cargarPeliculas = async() => {
 
     //CREA LOS CARD DE LAS PELICULAS
     datos.results.forEach(pelicula => {
+
+      const fecha = convertirFecha(pelicula.release_date);
+
         
         peliculas += `
         <div class="card">
@@ -82,20 +93,13 @@ const cargarPeliculas = async() => {
         <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="avatar">
         <div class="content">
         
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="20" height="20"></img></td>
-				<td>${pelicula.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="text-align: left;"><p>${pelicula.title}</p></td>
-               
-            </tr>
-
-            
-        </table>
+        
+        <div><img src="img/star.png" width="" height="20"></img>${pelicula.vote_average}</div></br>
+        <div>${pelicula.title}</div></br>
+        <div class="fecha">${fecha}</div>
     </div>
         </div>
+    
     `;
     });
 
@@ -144,23 +148,18 @@ const cargarSeries = async() => {
     
     //CREAR LOS CARD DE LAS SERIES
     datosSeries.results.forEach(serie => {
+
+      const fecha = convertirFecha(serie.first_air_date);
         
         series += `
         <div class="card">
         <a class="boton" href="#" onclick='obtenerVideo(${serie.id}, "${serie.original_name}", "${serie.overview}", "${serie.media_type}");'><i class="fas fa-eye"></i></a>
         <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" class="avatar">
         <div class="content">
-        <table width="100%" cellspacing="0">
-        <tr>
-				<td><img src="img/star.png" width="" height="20"></img></td>
-				<td>${serie.vote_average}</td>
-			</tr>
-            <tr>
-                <td style="width: 100%;"><p>${serie.original_name}</p></td>
-               
-            </tr>
-            
-        </table>
+        <div><img src="img/star.png" width="" height="20"></img>${serie.vote_average}</div></br>
+        <div>${serie.original_name}</div></br>
+        <div class="fecha">${fecha}</div>
+        
     </div>
         </div>
     `;
@@ -178,7 +177,7 @@ cargarSeries()
 //OBTNIENE VIDEO Y SINOPSIS
 async function obtenerVideo(id, name, sinopsis, tipo){
  
-// const obtenerVideo = async() => {
+
 
   try{
 
@@ -268,7 +267,7 @@ var closeBtn = modal.getElementsByClassName('close')[0];
 
 //MUESTRA EL MODAL
 modal.style.display = 'block';
-loadYouTubePlayer();
+youtubeCarga();
 //CIERRA MODAL Y RECARGA LA PAGINA
 closeBtn.addEventListener('click', function() {
 
@@ -282,32 +281,37 @@ detenerVideo();
 }
 
 
-function loadYouTubePlayer() {
+//Carga y detiene el reproductor de youtube
+function youtubeCarga() {
   if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     window.onYouTubeIframeAPIReady = function() {
-      createYouTubePlayer();
+      crearReproductor();
     };
   } else {
-    createYouTubePlayer();
+    crearReproductor();
   }
 }
 
-function createYouTubePlayer() {
+function crearReproductor() {
   player = new YT.Player('videoFrame', {
     events: {
-      'onReady': onYouTubePlayerReady
+      'onReady': reproductorListo
     }
   });
 }
 
-function onYouTubePlayerReady() {
-  player.stopVideo(); // Detiene el video cuando el reproductor está listo
+function reproductorListo() {
+  player.stopVideo();
 }
 
+ 
 function detenerVideo() {
   player.stopVideo();
 }
+
+
+

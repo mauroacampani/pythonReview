@@ -160,13 +160,13 @@ header {
 footer {
   left:0px;
   bottom:0px;
-  height:60px;
+  height:50px;
   width:100%;
   color: white;
   background:black;
   text-align: center;
-  padding-top: 5px;
-  position: fixed;
+
+  
 }
 
 .redes{
@@ -179,15 +179,15 @@ p{
 }
 
 /* ---- ----- ----- Contenedor Titulo y Controles ----- ----- ----- */
-.contenedor-titulo-controles {
+.contenedor-titulo {
 	display: flex;
 	justify-content: space-between;
 	
 }
 
-.contenedor-titulo-controles h3 {
+.contenedor-titulo h3 {
 	color: #fff;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 
@@ -280,6 +280,7 @@ p{
     width: 100%;
     display: flex;
     align-items: center;
+    
 
   }
   
@@ -311,7 +312,14 @@ p{
 	margin-left: 5px;
 	margin-right: 5px;
     padding-top: 10px;
-    font-family: monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.card .content .fecha{
+  font-weight: normal;
+  
 }
 
 
@@ -332,7 +340,7 @@ p{
     color: #ffffff; 
     position: absolute;
   right: 0;
-  width: 25px;
+  width: 35px;
   height: 25px;
   text-align: center;
 }
@@ -360,7 +368,7 @@ p{
   display: flex;
   width:max-content;
 }
-#formList, #formListSeries, #formListNov, #formListNovSerie {
+#formList, #formListSeries, #formListNov, #formListNovSerie, #formListVistas, #formListVistasSerie {
   width:1200px;
   max-width: 100%;
   overflow: auto;
@@ -369,14 +377,7 @@ p{
   scroll-snap-type: both;
 }
 
-#formListVistas, #formListVistasSerie {
-  /* width:1200px; */
-  /* max-width: 100%; */
-  overflow: auto;
-  margin:10px 50px 10px;
-  scroll-behavior: smooth;
-  scroll-snap-type: both;
-}
+
 
 #formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar , #formListNov::-webkit-scrollbar, #formListVista::-webkit-scrollbar, #formListNovSerie::-webkit-scrollbar{
   display: none;
@@ -678,3 +679,37 @@ max-width: 700px;
   color: var(--c);
 
 }
+
+label {
+  display: block;
+  margin-bottom: 10px;
+} 
+
+input{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  input[type="submit"] {
+    background-color: #1808f8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    resize: vertical; 
+  }
+
