@@ -87,7 +87,7 @@ const cargarPeliculas = async() => {
         peliculas += `
         <div class="card">
         
-        <a class="boton" href="#" onclick='obtenerVideo(${pelicula.id}, "${pelicula.title}", "${pelicula.overview}", "${pelicula.media_type}");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${pelicula.id}, "${pelicula.title}", "${pelicula.overview.replace(/['"]+/g, '')}", "${pelicula.media_type}");'><i class="fas fa-eye"></i></a>
 
        
         <img src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}" class="avatar">
@@ -153,7 +153,7 @@ const cargarSeries = async() => {
         
         series += `
         <div class="card">
-        <a class="boton" href="#" onclick='obtenerVideo(${serie.id}, "${serie.original_name}", "${serie.overview}", "${serie.media_type}");'><i class="fas fa-eye"></i></a>
+        <a class="boton" href="#" onclick='obtenerVideo(${serie.id}, "${serie.original_name}", "${serie.overview.replace(/['"]+/g, '')}", "${serie.media_type}");'><i class="fas fa-eye"></i></a>
         <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" class="avatar">
         <div class="content">
         <div><img src="img/star.png" width="" height="20"></img>${serie.vote_average}</div></br>
