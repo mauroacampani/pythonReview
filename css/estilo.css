@@ -382,7 +382,6 @@ p{
 #contentList::-webkit-scrollbar, #contentListSeries::-webkit-scrollbar , #contentListNov::-webkit-scrollbar, #contentListVista::-webkit-scrollbar, #contentListNovSerie::-webkit-scrollbar{
   display: none;
 }
-
 /* ---- ----- ----- Paginacion de las peliculas y series ----- ----- ----- */
 .paginacion {
 
