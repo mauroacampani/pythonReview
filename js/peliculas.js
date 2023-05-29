@@ -131,11 +131,11 @@ const cargarMasVistas = async(url, html) => {
 
 document.getElementById('flecha-derechaNov').onclick = function(){
     const widthItem = document.querySelector('.card').offsetWidth;
-    document.getElementById('formListNov').scrollLeft += widthItem;
+    document.getElementById('contentListNov').scrollLeft += widthItem;
   }
   document.getElementById('flecha-izquierdaNov').onclick = function(){
     const widthItem = document.querySelector('.card').offsetWidth;
-    document.getElementById('formListNov').scrollLeft -= widthItem;
+    document.getElementById('contentListNov').scrollLeft -= widthItem;
   }
 
 
@@ -189,6 +189,8 @@ const peliculaPrincipal = async() => {
 }
 
 peliculaPrincipal()
+
+//CAMBIA DE PELICULA PRINCIPAL CADA 12seg
 setInterval(peliculaPrincipal, 12000)
 
  

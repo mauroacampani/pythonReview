@@ -132,11 +132,11 @@ const cargarSeriesMasVistas = async(url, html) => {
 
 document.getElementById('flecha-derechaNovSerie').onclick = function(){
     const widthItem = document.querySelector('.card').offsetWidth;
-    document.getElementById('formListNovSerie').scrollLeft += widthItem;
+    document.getElementById('contentListNovSerie').scrollLeft += widthItem;
   }
   document.getElementById('flecha-izquierdaNovSerie').onclick = function(){
     const widthItem = document.querySelector('.card').offsetWidth;
-    document.getElementById('formListNovSerie').scrollLeft -= widthItem;
+    document.getElementById('contentListNovSerie').scrollLeft -= widthItem;
   }
 
 
@@ -165,7 +165,7 @@ const seriePrincipal = async() => {
        
     let seriesPrin = '';
 
-    //CREA LOS CARD DE LAS PELICULAS
+    //CREA LOS CARD DE LAS SERIES
 
         
         seriesPrin += `
@@ -175,7 +175,7 @@ const seriePrincipal = async() => {
         <div class="pelicula-content">
         <h3 class="titulo">${datosPrin.name}</h3>
     <p>${datosPrin.overview}</p>
-    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.name}", '${datosPrin.overview.replace(/['"]+/g, '')}', "tv");' class="boton"><i class="fas fa-play"></i>Información</button>
+    <button role="button" onclick='obtenerVideo(${datosPrin.id}, "${datosPrin.name}", "${datosPrin.overview.replace(/['"]+/g, '')}", "tv");' class="boton"><i class="fas fa-play"></i>Información</button>
   </div>
     
     `;
@@ -190,7 +190,10 @@ const seriePrincipal = async() => {
 }
 }
 
+
 seriePrincipal()
-setInterval(seriePrincipal, 15000)
+
+//CAMBIA LA SERIE PRINCIPAL CADA 12seg 
+setInterval(seriePrincipal, 12000)
 
  

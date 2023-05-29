@@ -15,22 +15,24 @@ const menu = document.querySelectorAll('.item');
 });
 
 
+//BOTONES DEL CARUSEL DE PELICULAS INDEX.HTML
 document.getElementById('flecha-derecha').onclick = function(){
   const widthItem = document.querySelector('.card').offsetWidth;
-  document.getElementById('formList').scrollLeft += widthItem;
+  document.getElementById('contentList').scrollLeft += widthItem;
 }
 document.getElementById('flecha-izquierda').onclick = function(){
   const widthItem = document.querySelector('.card').offsetWidth;
-  document.getElementById('formList').scrollLeft -= widthItem;
+  document.getElementById('contentList').scrollLeft -= widthItem;
 }
 
+//BOTONES DEL CARUSEL DE SERIES INDEX.HTML
 document.getElementById('flecha-derecha-series').onclick = function(){
   const widthItem = document.querySelector('.card').offsetWidth;
-  document.getElementById('formListSeries').scrollLeft += widthItem;
+  document.getElementById('contentListSeries').scrollLeft += widthItem;
 }
 document.getElementById('flecha-izquierda-series').onclick = function(){
   const widthItem = document.querySelector('.card').offsetWidth;
-  document.getElementById('formListSeries').scrollLeft -= widthItem;
+  document.getElementById('contentListSeries').scrollLeft -= widthItem;
 }
 
 
@@ -177,7 +179,6 @@ cargarSeries()
 //OBTNIENE VIDEO Y SINOPSIS
 async function obtenerVideo(id, name, sinopsis, tipo){
  
-
 
   try{
 

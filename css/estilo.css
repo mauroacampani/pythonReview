@@ -368,7 +368,7 @@ p{
   display: flex;
   width:max-content;
 }
-#formList, #formListSeries, #formListNov, #formListNovSerie, #formListVistas, #formListVistasSerie {
+#contentList, #contentListSeries, #contentListNov, #contentListNovSerie, #contentListVistas, #contentListVistasSerie {
   width:1200px;
   max-width: 100%;
   overflow: auto;
@@ -379,7 +379,7 @@ p{
 
 
 
-#formList::-webkit-scrollbar, #formListSeries::-webkit-scrollbar , #formListNov::-webkit-scrollbar, #formListVista::-webkit-scrollbar, #formListNovSerie::-webkit-scrollbar{
+#contentList::-webkit-scrollbar, #contentListSeries::-webkit-scrollbar , #contentListNov::-webkit-scrollbar, #contentListVista::-webkit-scrollbar, #contentListNovSerie::-webkit-scrollbar{
   display: none;
 }
 
@@ -420,7 +420,7 @@ background: #362464;
 }
 
 @media screen and (max-width: 800px) {
-  #formListVista, #formListVistaSerie {
+  #contentListVista, #contentListVistaSerie {
     width:1200px;
     max-width: 100%;
     overflow: auto;
@@ -434,7 +434,7 @@ background: #362464;
     width:max-content;
   }
  
-  #formListVista::-webkit-scrollbar, #formListVistaSerie::-webkit-scrollbar{
+  #contentListVista::-webkit-scrollbar, #contentListVistaSerie::-webkit-scrollbar{
     display: none;
   }
 
@@ -443,7 +443,7 @@ background: #362464;
 }
 
 @media screen and (min-width: 1370px) {
-  #formList, #formListSeries, #formListNov, #formListNovSerie {
+  #contentList, #contentListSeries, #contentListNov, #contentListNovSerie {
     width: 2700px;
 
   }
@@ -634,7 +634,7 @@ max-width: 700px;
   opacity: 0.7;
 }
 
-.contenedor-form {
+.contenedor-voto {
   display: flex;
   justify-content: center;
   align-items: center;
