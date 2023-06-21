@@ -18,7 +18,7 @@
 
         <section>
             <div style="margin: 0 auto;">
-            <form action="https://formsubmit.co/francomarchisella@gmail.com" method="POST">
+            <form id="formulario" onsubmit="return validar()">
                 <p>
                     
                     <h2>Envianos tu Reseña:</h2>
@@ -26,37 +26,37 @@
                 </p>
                 
                     <label for="nombre" >
-                        Nombre:
+                        Nombre*:
                     </label>
-                        <input type="text" name="nombre" title="Ingrese su nombre" required>
+                        <input type="text" id="nombre" name="nombre" title="Ingrese su nombre">
                     
                 
                 
                     <label for="email">
-                        Email:
+                        Email*:
                     </label>
-                        <input type="email" name="email" title="Ingrese un email" required>
+                        <input type="email" id="email" name="email" title="Ingrese un email">
                     
                 
                     <label for="pelicula/serie">
-                        Nombre de Película/Serie:
+                        Nombre de Película/Serie*:
                     </label>
-                        <input type="text" name="pelicula-serie" required>
+                        <input type="text" id="pelicula-serie" name="pelicula-serie">
                     
             
-                <label>Califica la Película/Serie:</label>
+                <label>Califica la Película/Serie*:</label>
 
 
-                </select>
+                
                     <div class="contenedor-form">
                         
                         <div class="rating">
                            
-                            <input type="radio" name="star5" style="--c:#ff9933">
-                            <input type="radio" name="star4" style="--c:#ff9933">
-                            <input type="radio" name="star3" style="--c:#ff9933">
-                            <input type="radio" name="star2" style="--c:#ff9933">
-                            <input type="radio" name="star1" style="--c:#ff9933">
+                            <input type="radio" name="star" style="--c:#ff9933">
+                            <input type="radio" name="star" style="--c:#ff9933">
+                            <input type="radio" name="star" style="--c:#ff9933">
+                            <input type="radio" name="star" style="--c:#ff9933">
+                            <input type="radio" name="star" style="--c:#ff9933">
                         </div>    
                 
             
@@ -64,9 +64,9 @@
                     </div> 
                 
                     <label for="Reseña">
-                        Comentarios:
+                        Comentarios*:
                     </label>
-                        <textarea name="mensaje" maxlength="100" required></textarea>
+                        <textarea name="mensaje" id="comentario" name="comentario"></textarea>
                     
         
                 
@@ -82,6 +82,7 @@
         <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
         <script src="js/contenido.js"></script>
       <script src="js/main.js"></script>
+      <script src="js/validaciones.js"></script>
 
 </body>
 </html>
