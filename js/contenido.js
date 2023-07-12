@@ -18,7 +18,7 @@
 
 
 let pie = `
-<div style="text-align: center;">Disenado por Equipo 8</div>
+<div style="text-align: center;">Disenado Mauro Campani</div>
                 <a href="https://www.instagram.com/"><img id=redes src="img/instagram.png" alt="Instagram" width="25px"></a>
                 <a href="https://es-la.facebook.com/"><img id=redes src="img/facebook.png" alt="Facebook" width="25px"></a>
                 <a href="https://www.whatsapp.com/?lang=es"><img id=redes src="img/whatsapp.png" alt="Whatsapp" width="25px"></a>
